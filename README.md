@@ -1,2 +1,7 @@
-# RareGeneticConditionsDiagnoser
-Simple webapp that determines probable genetic conditions given phenotypes.
+# Rare Genetic Conditions Diagnoser
+
+## Run
+```
+pip install -r requirements.txt
+gunicorn backend.wsgi
+```
