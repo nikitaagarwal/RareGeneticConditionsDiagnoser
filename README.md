@@ -3,5 +3,5 @@
 ## Run
 ```
 pip install -r requirements.txt
-gunicorn backend.wsgi
+gunicorn app.wsgi
 ```
