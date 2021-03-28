@@ -31,5 +31,5 @@ class HomeView(TemplateView):
             data = preprocess()
             results = get_probable_diagnoses(data, input_phenotypes)
   
-        args = {'form': form, 'text': text, 'results' : results}
+        args = {'form': form, 'text': text, 'results' : results, 'results_empty' : (len(results)==0)}
         return render(request, self.template_name, args)
