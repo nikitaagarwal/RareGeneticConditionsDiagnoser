@@ -14,17 +14,23 @@
       </h1>
     </div>
   </section>
-    <form method="POST">
-        <div class="container">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit</button>
-            <br>
-            Input: {{text}}
-        </div>
+  <div class="columns">
+    <div class="column" >
+    <form method="POST" class="box">
+    
+      {% csrf_token %}
+      {{ form.as_p }} <br>
+    
+      <button class="button is-primary">Submit</button>
+      <br>
+      <br>
+      Input: {{text}}        
     </form>
   <title>Probable conditions:</title>
   <section class="section">
+  {% if results_empty %}
+    No conditions match the phenotypes included in input.
+  {% endif %}
   {% for x in results %}
       <div class="card">
       <header class="card-header">
