@@ -7,4 +7,4 @@ pip install -r requirements.txt
 gunicorn app.wsgi
 ```
 
-### See discuss.pdf for test/edge cases, some general tradeoffs, and possible feature add-ons for the future.
+### See tradeoffs.pdf for test/edge cases, some general tradeoffs, and possible feature add-ons for the future.
