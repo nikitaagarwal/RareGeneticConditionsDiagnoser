@@ -29,7 +29,10 @@ def load_condition_data():
 		data = f.read()
 
 	freq_dict = {
-		'Obligate (100%)' : (1.0, 1.0),
+		# Obligate is 99% instead of 100%, because 100% probability is misleading.
+		# Existence of a symtpom does not imply existence of the condition for the
+		# use case we are supporting.
+		'Obligate (100%)' : (99.0, 99.0),
 		'Very frequent (99-80%)' : (0.8, 0.99),
 		'Frequent (79-30%)' : (0.3, 0.79),
 		'Occasional (29-5%)' : (0.05, 0.29),
