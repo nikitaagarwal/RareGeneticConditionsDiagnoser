@@ -17,14 +17,12 @@
   <div class="columns">
     <div class="column" >
     <form method="POST" class="box">
-    
       {% csrf_token %}
       {{ form.as_p }} <br>
-    
       <button class="button is-primary">Submit</button>
       <br>
       <br>
-      Input: {{text}}        
+      {{text}}        
     </form>
   <title>Probable conditions:</title>
   <section class="section">
