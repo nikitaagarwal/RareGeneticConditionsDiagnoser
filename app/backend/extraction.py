@@ -8,7 +8,21 @@ import ssl
 from django.conf import settings
 from app.backend.preprocess import load_condition_data
 
-nltk_setup()
+"""
+Set up NLTK tagger.
+"""
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+nltk.data.path.append(os.path.join(settings.DATA_DIR,'punkt'))
+nltk.download('punkt', download_dir=os.path.join(settings.DATA_DIR,'punkt'), 
+	raise_on_error=True)
+nltk.download('averaged_perceptron_tagger',
+	download_dir=os.path.join(settings.DATA_DIR,'punkt'), raise_on_error=True)
+
 
 def get_phenotypes(input):
 	"""
@@ -57,19 +71,3 @@ def clean_results(probable_diagnoses):
 	return sorted(final_results, key=lambda disease_info: disease_info[2],
 		reverse=True)
 
-
-def nltk_setup():
-	"""
-	Set up NLTK tagger.
-	"""
-	try:
-	    _create_unverified_https_context = ssl._create_unverified_context
-	except AttributeError:
-	    pass
-	else:
-	    ssl._create_default_https_context = _create_unverified_https_context
-	nltk.data.path.append(os.path.join(settings.DATA_DIR,'punkt'))
-	nltk.download('punkt', download_dir=os.path.join(settings.DATA_DIR,'punkt'), 
-		raise_on_error=True)
-	nltk.download('averaged_perceptron_tagger',
-	download_dir=os.path.join(settings.DATA_DIR,'punkt'), raise_on_error=True)
