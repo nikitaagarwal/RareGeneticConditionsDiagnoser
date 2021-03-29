@@ -2,7 +2,7 @@ from collections import defaultdict
 import os
 import nltk
 from nltk import word_tokenize,sent_tokenize
-from math import isinf
+from math import isinf, floor
 import ssl
 
 from django.conf import settings
@@ -66,7 +66,7 @@ def clean_results(probable_diagnoses):
 	for disease,((curr_min, curr_max), curr_count, curr_list) in probable_diagnoses.items():
 		if isinf(curr_min):
 			continue
-		final_results.append((disease, round((curr_min/curr_count)*100.0), round((curr_max/curr_count)*100.0),
+		final_results.append((disease, floor((curr_min/curr_count)*100.0), floor((curr_max/curr_count)*100.0),
 			curr_list))
 	return sorted(final_results, key=lambda disease_info: disease_info[2],
 		reverse=True)
