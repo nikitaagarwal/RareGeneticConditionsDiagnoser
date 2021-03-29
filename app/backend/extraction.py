@@ -68,6 +68,6 @@ def clean_results(probable_diagnoses):
 			continue
 		final_results.append((disease, floor((curr_min/curr_count)*100.0), floor((curr_max/curr_count)*100.0),
 			curr_list))
-	return sorted(final_results, key=lambda disease_info: disease_info[2],
+	return sorted(final_results, key=lambda disease_info: disease_info[1],
 		reverse=True)
 
