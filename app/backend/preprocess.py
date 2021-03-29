@@ -1,16 +1,19 @@
 #!/usr/bin/env python
-import os
-from django.conf import settings
-from pathlib import Path
-import xml.etree.ElementTree as ET
-from xml.etree.ElementTree import fromstring, ElementTree
 from collections import defaultdict
 import json
 import math
+import os
+from pathlib import Path
+import xml.etree.ElementTree as ET
+from xml.etree.ElementTree import fromstring, ElementTree
 
-DATA = os.path.join(settings.DATA_DIR,'disorder_data.json')
+from django.conf import settings
 
-def preprocess():
+
+DATA = os.path.join(settings.DATA_DIR, 'disorder_data.json')
+
+
+def load_condition_data():
 	"""
 	If we've already serialized the data, we can use the existing json data to
 	get the condition info dict.
@@ -54,7 +57,7 @@ def preprocess():
 
 			disorder_data_dict[phenotype.lower()].append((disorder_name, freq_range))
 
-	# Serialize to JSON for future use.
+	# Serialize to JSON and save for future use.
 	with open(DATA, 'w') as fp:
 		json.dump(disorder_data_dict, fp)
 	return disorder_data_dict
