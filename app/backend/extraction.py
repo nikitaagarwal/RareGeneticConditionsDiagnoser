@@ -1,25 +1,30 @@
+from collections import defaultdict
+import os
 import nltk
 from nltk import word_tokenize,sent_tokenize
-from collections import defaultdict
-import ssl
 from math import isinf
+import ssl
+
 from django.conf import settings
-import os
+from app.backend.preprocess import load_condition_data
+
+nltk_setup()
 
 def get_phenotypes(input):
 	"""
 	Identify all nouns or noun phrases from the input text.
 	"""
-	nltk_setup()
+
 	return ([word for (word, pos) in nltk.pos_tag(nltk.word_tokenize(input))
-		if pos[0] == 'N' or pos[0] == 'NN' or pos[0] == 'NP'])
+		     if pos[0] in {'N', 'NN', 'NP'}])
 
 
-def get_probable_diagnoses(data, input_phenotypes):
+def get_probable_diagnoses(input_phenotypes):
 	"""
 	Given pheonotypes, determine possible conditions and their associated
 	probability range given data from OrphaData.
 	"""
+	data = load_condition_data()
 	# We only need to look at symptoms that we have data for.
 	relevant_phenotypes = set(data.keys()).intersection(set(input_phenotypes))
 	
