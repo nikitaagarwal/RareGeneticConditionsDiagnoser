@@ -38,7 +38,11 @@
       </header>
       <div class="card-content">
         <div class="content">
-          Probability range: {{x.1}}%-{{x.2}}%
+          {% if x.1 == x.2 %}
+            Probability: {{x.1}}%
+          {% else %}
+            Probability range: {{x.1}}%-{{x.2}}%
+          {% endif %}
           <br>
           Based on: {{x.3}}
         </div>
